@@ -130,22 +130,15 @@ Delivery impact on ratings
 📸 Dashboard Preview
 Executive Dashboard
 
-Add your dashboard screenshots here.
+<img width="1327" height="749" alt="image" src="https://github.com/user-attachments/assets/fce04f17-6024-425e-8cbd-2b76ad030661" />
+<img width="1324" height="749" alt="image" src="https://github.com/user-attachments/assets/d4645195-13b4-4d9f-bf7f-881dca988c81" />
 
-Customer Analytics
 
-Add your dashboard screenshots here.
-
-Product Analytics
-
-Add your dashboard screenshots here.
 
 🚀 How To Run
 Clone Repository
 git clone https://github.com/yourusername/olist-etl-powerbi-project.git
 cd olist-etl-powerbi-project
-Install Requirements
-pip install -r requirements.txt
 Run ETL Pipeline
 python etl_pipeline.py
 📁 Project Structure
