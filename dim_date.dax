@@ -1,0 +1,42 @@
+/* ============================================================
+   dim_date  –  Power BI DAX (paste in a new Calculated Table)
+   Covers the full Olist date range: 2016-01-01 → 2018-12-31
+   ============================================================ */
+
+dim_date =
+VAR StartDate = DATE(2016, 1, 1)
+VAR EndDate   = DATE(2018, 12, 31)
+
+RETURN
+ADDCOLUMNS(
+    CALENDAR(StartDate, EndDate),
+
+    -- surrogate key  e.g. 20170315
+    "date_sk",          FORMAT([Date], "YYYYMMDD") + 0,
+
+    -- basic date parts
+    "year",             YEAR([Date]),
+    "month_num",        MONTH([Date]),
+    "month_name",       FORMAT([Date], "MMMM"),
+    "month_short",      FORMAT([Date], "MMM"),
+    "quarter_num",      QUARTER([Date]),
+    "quarter_label",    "Q" & QUARTER([Date]),
+    "year_quarter",     YEAR([Date]) & " Q" & QUARTER([Date]),
+    "day_of_month",     DAY([Date]),
+    "day_of_week_num",  WEEKDAY([Date], 2),     -- 1=Mon … 7=Sun
+    "day_of_week_name", FORMAT([Date], "DDDD"),
+    "day_short",        FORMAT([Date], "DDD"),
+    "week_num",         WEEKNUM([Date], 2),     -- ISO week
+    "year_week",        YEAR([Date]) & "-W" & FORMAT(WEEKNUM([Date], 2), "00"),
+
+    -- fiscal year (Olist → assume Jan = start of FY)
+    "fiscal_year",      "FY" & YEAR([Date]),
+    "fiscal_quarter",   "FY" & YEAR([Date]) & " Q" & QUARTER([Date]),
+
+    -- flags
+    "is_weekend",       IF(WEEKDAY([Date], 2) >= 6, 1, 0),
+    "is_weekday",       IF(WEEKDAY([Date], 2) <= 5, 1, 0),
+
+    -- for time-intelligence (mark this column as the date column in the model)
+    "full_date_label",  FORMAT([Date], "DD MMM YYYY")
+)
